@@ -12,7 +12,6 @@ export function Board(props) {
   const [xEmoji, setXEmoji] = useState("");
   const [oEmoji, setOEmoji] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(null));
-  const [XIsNext, setXIsNext] = useState(true);
   const [Winner, SetWinner] = useState(null);
 
   function handleClick(i) {
@@ -22,7 +21,6 @@ export function Board(props) {
       const computerMove = calculateMove(sq,oEmoji,xEmoji);
       sq[computerMove] = oEmoji;
       setSquares(sq);
-      setXIsNext(true)
       SetWinner(calculateWinner(sq))
     }
   }
@@ -42,9 +40,8 @@ export function Board(props) {
     if(!gameStarted){
       setGameStarted(true)
     } else {
-      setGameStarted(true)
+      setGameStarted(false)
       setSquares(Array(9).fill(null))
-      setXIsNext(true)
       SetWinner(null)
     }
   }
@@ -110,7 +107,7 @@ export function Board(props) {
         </div>
         <div style= {{textAlign:"center"}}>
           {Boolean(Winner) && Winner!=="draw" && "The winner is "+Winner}
-          {Boolean(Winner) && Winner=="draw" && "It is a "+Winner}
+          {Boolean(Winner) && Winner==="draw" && "It is a "+Winner}
         </div>
         <div> 
           {Boolean(Winner) && renderStartSquare()}
