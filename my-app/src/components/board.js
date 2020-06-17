@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import  { useEffect }  from 'react';
 import '../index.css';
 import { Square } from './square.js'
 import { SelectionSquare } from './selectionsquare.js'
@@ -13,15 +14,26 @@ export function Board(props) {
   const [oEmoji, setOEmoji] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [Winner, SetWinner] = useState(null);
+  const [xTurn, setXTurn] = useState(true);
 
   function handleClick(i) {
-    if (!squares[i] && !Winner) {
+    if (!squares[i] && !Winner && xTurn) {
       const sq = squares.slice();
       sq[i] = xEmoji;
-      const computerMove = calculateMove(sq,oEmoji,xEmoji);
-      sq[computerMove] = oEmoji;
       setSquares(sq);
       SetWinner(calculateWinner(sq))
+      const sqtemp = sq.slice()
+      setXTurn(false)
+      if (!calculateWinner(sq)) {
+          const computerMove = calculateMove(sqtemp, oEmoji, xEmoji);
+          sqtemp[computerMove] = oEmoji;
+        }
+      setTimeout(() => {
+        SetWinner(calculateWinner(sqtemp))
+        setSquares(sqtemp);
+        setXTurn(true)
+        console.log("delay")
+      }, 1000);
     }
   }
 
