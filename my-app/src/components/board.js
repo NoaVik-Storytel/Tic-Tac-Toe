@@ -13,15 +13,15 @@ export function Board(props) {
   const [xEmoji, setXEmoji] = useState("");
   const [oEmoji, setOEmoji] = useState("");
   const [squares, setSquares] = useState(Array(9).fill(null));
-  const [Winner, SetWinner] = useState(null);
+  const [winner, setWinner] = useState(null);
   const [xTurn, setXTurn] = useState(true);
 
   function handleClick(i) {
-    if (!squares[i] && !Winner && xTurn) {
+    if (!squares[i] && !winner && xTurn) {
       const sq = squares.slice();
       sq[i] = xEmoji;
       setSquares(sq);
-      SetWinner(calculateWinner(sq))
+      setWinner(calculateWinner(sq))
       const sqtemp = sq.slice()
       setXTurn(false)
       if (!calculateWinner(sq)) {
@@ -29,7 +29,7 @@ export function Board(props) {
           sqtemp[computerMove] = oEmoji;
         }
       setTimeout(() => {
-        SetWinner(calculateWinner(sqtemp))
+        setWinner(calculateWinner(sqtemp))
         setSquares(sqtemp);
         setXTurn(true)
         console.log("delay")
@@ -54,7 +54,7 @@ export function Board(props) {
     } else {
       setGameStarted(false)
       setSquares(Array(9).fill(null))
-      SetWinner(null)
+      setWinner(null)
     }
   }
 
@@ -118,11 +118,11 @@ export function Board(props) {
           {renderSquare(8)}
         </div>
         <div style= {{textAlign:"center"}}>
-          {Boolean(Winner) && Winner!=="draw" && "The winner is "+Winner}
-          {Boolean(Winner) && Winner==="draw" && "It is a "+Winner}
+          {Boolean(winner) && winner!=="draw" && "The winner is "+winner}
+          {Boolean(winner) && winner==="draw" && "It is a "+winner}
         </div>
         <div> 
-          {Boolean(Winner) && renderStartSquare()}
+          {Boolean(winner) && renderStartSquare()}
         </div>
       </div>
     );
