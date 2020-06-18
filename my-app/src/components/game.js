@@ -1,6 +1,6 @@
 import React from 'react';
 import '../index.css';
-import {Board} from './board.js'
+import {Board} from './board'
 
 
 export function Game (props) {

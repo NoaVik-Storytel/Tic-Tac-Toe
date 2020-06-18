@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import  { useEffect }  from 'react';
 import '../index.css';
-import { Square } from './square.js'
-import { SelectionSquare } from './selectionsquare.js'
-import { calculateWinner } from './functions.js'
-import { calculateMove } from './functions.js'
-import { StartSquare } from './startsquare.js'
+import { Square } from './square'
+import { SelectionSquare } from './selectionsquare'
+import { calculateWinner, calculateMove } from './functions'
+import { StartSquare } from './startsquare'
 
 export function Board(props) {
   const [gameReady, setGameReady] = useState(false);
@@ -29,10 +27,9 @@ export function Board(props) {
           sqtemp[computerMove] = oEmoji;
         }
       setTimeout(() => {
-        setWinner(calculateWinner(sqtemp))
+        setWinner(calculateWinner(sqtemp));
         setSquares(sqtemp);
-        setXTurn(true)
-        console.log("delay")
+        setXTurn(true);
       }, 1000);
     }
   }

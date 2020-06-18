@@ -39,8 +39,9 @@ export function calculateMove(squares, computer, human) {
       if (squares[line[2]] === emojis[i] && squares[line[0]] === squares[line[2]] && !squares[line[1]]) return line[1]
     }
   }
+  const order = [4,0,2,6,8,1,3,5]
   for (let i = 0; i < squares.length; i++) {
-    if (!squares[i]) return i
+    if (!squares[order[i]]) return order[i]
   }
   return ""
 }
